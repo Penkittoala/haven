@@ -1,0 +1,17 @@
+name: JiangChi_Auto_Update
+on: 
+  repository_dispatch:
+    types: [update_page]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Update Content
+        run: |
+          echo "${{ github.event.client_payload.content }}" > index.html
+          git config --global user.name "JiangChi"
+          git config --global user.email "jiangchi@haven.com"
+          git add index.html
+          git commit -m "昭昭的专属蓝，江迟已送达"
+          git push
